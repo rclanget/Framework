@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+<head> 
+	<meta charset="utf-8">
+	<title>Titre de la page</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="js/script.js"></script>
+</head>
+<body class="bkg-accueil">
+	<header class="blue1Back">
+		<div class="logo">
+			<a href="#"><span class="blue0">MyOwn</span>Network</a>
+		</div>
+		<div class="wrapper">
+			<nav>
+				<ul>
+					<a href="#"><li>Annuaire</li></a>
+					<a href="#"><li>Forum</li></a>
+					<a href="#"><li>Tickets</li></a>
+					<li class="white" onclick="showbox('contact-box')">Contact</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="btn-login">
+			<button class="btn blue0Back white" onclick="showbox('login-box')">Log in</button>				
+		</div>
+	</header>
+	<div class="contact-box blue2Back white">
+		<div class="wrapper">
+			<div class="contact-box_box">
+				<h2>Contact</h2>
+				<form>
+					<input type="text" name="nom" placeholder="Nom">
+					<input type="mail" name="email" placeholder="E-mail">
+					<input type="text" name="sujet" placeholder="Sujet">
+					<textarea placeholder="Message" name="message"></textarea>
+					<button class="btn blue0Back white" type="submit">Envoyer</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="forum">
+		<div class="wrapper">
+			<div class="forum_nav grey2">
+				<h1>Forum</h1>
+				<button class="btn">Ajouter un artcicle</button>
+				<ul>
+					<a href="#" class="grey0Back" onclick="show_sscat('sscat1')"><li>Catégorie 1</li></a>
+						<ul id="sscat1" class="forum_nav__sscat">
+							<a href="#"><li>Sous-catégorie 1</li></a>
+							<a href="#"><li>Sous-catégorie 2</li></a>
+							<a href="#"><li>Sous-catégorie 3</li></a>
+							<a href="#"><li>Sous-catégorie 4</li></a>
+						</ul>
+					<a href="#" class="grey0Back"><li>Catégorie 2</li></a>
+					<a href="#" class="grey0Back"><li>Catégorie 3</li></a>
+					<a href="#" class="grey0Back"><li>Catégorie 4</li></a>
+				</ul>
+			</div>
+			<div class="forum_content">
+				<div class="forum_content__header">
+					<h2>Derniers posts</h2>
+				</div>
+				<div class="forum_content__posts">
+					<ul>
+						<a href="#">
+							<li>
+								<h3>Titre post 1</h3>
+								<p>Date: 00/00/00 par: XYZ</p>
+							</li>
+						</a>
+						<a href="#">
+							<li>
+								<h3>Titre post 2</h3>
+								<p>Date: 00/00/00 par: XYZ</p>
+							</li>
+						</a>
+						<a href="#">
+							<li>
+								<h3>Titre post 3</h3>
+								<p>Date: 00/00/00 par: XYZ</p>
+							</li>
+						</a>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="page-filter">
+	</div>
+</body>
+</html>
