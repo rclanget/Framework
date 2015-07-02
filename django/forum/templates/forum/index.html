@@ -15,11 +15,11 @@
 				<a href="{% url "forum.views.add_post" %}"><button class="btn">Ajouter un artcicle</button></a>
 				<ul>
 				{% for categorie in categories %}
-				<a href="#" class="grey0Back" onclick="show_sscat('{{ categorie.name|cut:" " }}')"><li>{{ categorie.name }}</li></a>
-					<ul id="{{ categorie.name|cut:" " }}" class="forum_nav__sscat">
+				<a href="#" class="grey0Back" onclick="show_sscat('{{ categorie.id }}')"><li>{{ categorie.name }}</li></a>
+					<ul id="{{ categorie.id }}" class="forum_nav__sscat">
 					{% for sscategorie in sscategories %}
 						{% if sscategorie.postcategorie == categorie %}
-						<a href="#"><li>{{ sscategorie.name }}</li></a>
+						<a href="{% url "forum.views.list_posts" sscategorie.id %}"><li>{{ sscategorie.name }}</li></a>
 						{% endif %}
 					{% endfor %}
 					</ul>
