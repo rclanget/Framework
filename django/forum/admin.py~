@@ -1,0 +1,7 @@
+from django.contrib import admin
+from forum.models import PostCategorie, Post, PostMessage, Thread
+
+admin.site.register(PostCategorie)
+admin.site.register(Post)
+admin.site.register(PostMessage)
+admin.site.register(Thread)

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Forum - Nouveau post{% endblock %}
+{% block staticfiles %}
+	<link rel="stylesheet" href="css/style.css">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="js/script.js"></script>
+{% endblock %}
+{% block content %}
+	<div class="forum">
+		<div class="wrapper">
+			<div class="forum_nav grey2">
+				<h1>Forum</h1>
+				<button class="btn">Ajouter un artcicle</button>
+				<ul>
+					<a href="#" class="grey0Back" onclick="show_sscat('sscat1')"><li>Catégorie 1</li></a>
+						<ul id="sscat1" class="forum_nav__sscat">
+							<a href="#"><li>Sous-catégorie 1</li></a>
+							<a href="#"><li>Sous-catégorie 2</li></a>
+							<a href="#"><li>Sous-catégorie 3</li></a>
+							<a href="#"><li>Sous-catégorie 4</li></a>
+						</ul>
+					<a href="#" class="grey0Back"><li>Catégorie 2</li></a>
+					<a href="#" class="grey0Back"><li>Catégorie 3</li></a>
+					<a href="#" class="grey0Back"><li>Catégorie 4</li></a>
+				</ul>
+			</div>
+			<div class="post_content">
+				<div class="post_content__header">
+					<h2>Nouveau post</h2>
+				</div>
+				<div class="newpost_content__body">
+					<form>
+						<label for="titre">Titre</label>
+						<input id="titre" type="text" name="titre" placeholder="Titre">
+
+						<label for="categorie">Tag</label>
+						<select id="categorie" name="categorie">
+							<option>Catégorie 1</option>
+							<option>Catégorie 2</option>
+							<option>Catégorie 3</option>
+							<option>Catégorie 4</option>
+						</select>
+
+						<label for="message">Message</label>
+						<textarea id="message" name="message"></textarea>	
+
+						<button type="submit" class="btn blue0Back white">Valider</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

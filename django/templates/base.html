@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %}Titre de la page{% endblock %}</title>
+	{% block staticfiles %}
+ 	{% endblock %}
+</head>
+<body {% block bodyclass %}{% endblock %}>
+	{% block header %}
+	<header class="blue1Back">
+		<div class="logo">
+			<a href="{% url "intra.views.home" %}"><span class="blue0">MyOwn</span>Network</a>
+		</div>
+			<nav>
+				<ul>
+					<a href="#"><li>Annuaire</li></a>
+					<a href="{% url "forum.views.home" %}"><li>Forum</li></a>
+					<a href="#"><li>Tickets</li></a>
+					<li class="white" onclick="showbox('contact-box')">Contact</li>
+				</ul>
+			</nav>
+		<div class="btn-login">
+			<button class="btn blue0Back white" onclick="showbox('login-box')">Log in</button>				
+		</div>
+	</header>
+	<div class="login-box blue2Back white">
+		<div class="wrapper">
+			<div class="login-box_box">
+				<h2>Log in</h2>
+				<form>
+					<input type="text" name="email" placeholder="E-mail">
+					<input type="password" name="password" placeholder="Password">
+					<button class="btn blue0Back white">Sign in</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="register-box blue2Back white">
+		<div class="wrapper">
+			<div class="login-box_box">
+				<h2>Register</h2>
+				<form>
+					<input type="mail" name="email" placeholder="E-mail">
+					<input type="text" name="pseudo" placeholder="Pseudo">
+					<input type="password" name="password" placeholder="Password">
+					<input type="password" name="password" placeholder="Repeat Password">
+					<button class="btn blue0Back white">Sign in</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="contact-box blue2Back white">
+		<div class="wrapper">
+			<div class="contact-box_box">
+				<h2>Contact</h2>
+				<form>
+					<input type="text" name="nom" placeholder="Nom">
+					<input type="mail" name="email" placeholder="E-mail">
+					<input type="text" name="sujet" placeholder="Sujet">
+					<textarea placeholder="Message" name="message"></textarea>
+					<button class="btn blue0Back white" type="submit">Envoyer</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+   <section id="content">
+       {% block content %}{% endblock %}
+	<div class="page-filter">
+	</div>
+   </section>
+{% block footer %}
+   <footer></footer>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Forum - Accueil{% endblock  %}
+{% block staticfiles  %}
+	<link rel="stylesheet" href="{% static 'forum/css/style.css' %}">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="{% static 'forum/js/script.js' %}"></script>
+{% endblock %}
+{% block content %}
+	<div class="forum">
+		<div class="wrapper">
+			<div class="forum_nav grey2">
+				<h1>Forum</h1>
+				<a href="{% url "forum.views.add_post" %}"><button class="btn">Ajouter un artcicle</button></a>
+				<ul>
+				{% for categorie in categories %}
+				<a href="#" class="grey0Back" onclick="show_sscat({{ categorie.name }})"><li>{{ categorie.name }}</li></a>
+					<ul id="{{ categorie.name }}" class="forum_nav__sscat">
+					{% for sscategorie in sscategories %}
+						{% if sscategorie.postcategorie == categorie %}
+						<a href="#"><li>{{ sscategorie.name }}</li></a>
+						{% endif %}
+					{% endfor %}
+					</ul>
+				{% empty %}
+				<p>Pas de catégorie</p>
+				{% endfor %}
+				</ul>
+			</div>
+			<div class="forum_content">
+				<div class="forum_content__header">
+					<h2>Derniers posts</h2>
+				</div>
+				<div class="forum_content__posts">
+					<ul>
+						<a href="#">
+							<li>
+								<h3>Titre post 1</h3>
+								<p>Date: 00/00/00 par: XYZ</p>
+							</li>
+						</a>
+						<a href="#">
+							<li>
+								<h3>Titre post 2</h3>
+								<p>Date: 00/00/00 par: XYZ</p>
+							</li>
+						</a>
+						<a href="#">
+							<li>
+								<h3>Titre post 3</h3>
+								<p>Date: 00/00/00 par: XYZ</p>
+							</li>
+						</a>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
