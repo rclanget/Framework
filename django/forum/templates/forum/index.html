@@ -34,24 +34,18 @@
 				</div>
 				<div class="forum_content__posts">
 					<ul>
-						<a href="#">
+						{% for post in posts %}
+						<a href="{% url 'forum.views.post' post.id %}">
 							<li>
-								<h3>Titre post 1</h3>
-								<p>Date: 00/00/00 par: XYZ</p>
+								<h3>{{ post.titre }}</h3>
+								<p>Posté le {{ post.date }} par {{ post.auteur }}</p>
 							</li>
 						</a>
+						{% empty %}
 						<a href="#">
-							<li>
-								<h3>Titre post 2</h3>
-								<p>Date: 00/00/00 par: XYZ</p>
-							</li>
+						  Aucun post par ici..
 						</a>
-						<a href="#">
-							<li>
-								<h3>Titre post 3</h3>
-								<p>Date: 00/00/00 par: XYZ</p>
-							</li>
-						</a>
+						{% endfor %}
 					</ul>
 				</div>
 			</div>

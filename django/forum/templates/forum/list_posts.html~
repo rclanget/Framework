@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Forum - Accueil{% endblock  %}
+{% block title %}Forum - Liste posts{% endblock  %}
 {% block staticfiles  %}
 	<link rel="stylesheet" href="{% static 'forum/css/style.css' %}">
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -28,28 +28,22 @@
 			</div>
 			<div class="forum_content">
 				<div class="forum_content__header">
-					<h2>Derniers posts</h2>
+					<h2>{{ mycat.name }}</h2>
 				</div>
 				<div class="forum_content__posts">
 					<ul>
+						{% for post in posts %}
 						<a href="#">
 							<li>
-								<h3>Titre post 1</h3>
-								<p>Date: 00/00/00 par: XYZ</p>
+								<h3>{{ post.titre }}</h3>
+								<p>Posté le {{ post.date }} par {{ post.auteur }}</p>
 							</li>
 						</a>
+						{% empty %}
 						<a href="#">
-							<li>
-								<h3>Titre post 2</h3>
-								<p>Date: 00/00/00 par: XYZ</p>
-							</li>
+						  Pas de post pour cette catégorie.
 						</a>
-						<a href="#">
-							<li>
-								<h3>Titre post 3</h3>
-								<p>Date: 00/00/00 par: XYZ</p>
-							</li>
-						</a>
+						{% endfor %}
 					</ul>
 				</div>
 			</div>

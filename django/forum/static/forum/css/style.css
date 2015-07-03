@@ -325,6 +325,15 @@ nav ul li {
 	list-style: none;
 }
 
+.forum_content__posts ul a li h3 {
+    line-height: 35px;
+}
+
+.forum_content__posts ul a li p {
+    font-size: 15px;
+    line-height: 25px;
+}
+
 .forum_content__posts ul a li {
 	width: 90%;
 	padding-right: 5%;

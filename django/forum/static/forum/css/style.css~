@@ -6,7 +6,7 @@
 }
 
 .wrapper {
-	width: 1048px;
+	width: 80%;
 	margin: auto;
 }
 
@@ -323,6 +323,15 @@ nav ul li {
 
 .forum_content__posts ul {
 	list-style: none;
+}
+
+.forum_content__posts ul a li h3 {
+    line-height: 35px;
+}
+
+.forum_content__posts ul a li p {
+    font-size: 13px;
+    line-height: 25px;
 }
 
 .forum_content__posts ul a li {
