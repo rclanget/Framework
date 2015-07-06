@@ -52,8 +52,7 @@ def add_post(request):
             mypost = Post.objects.get(titre=request.POST['titre'])
             PostMessage(content=request.POST['message'], auteur=request.user.username, post=mypost).save()
         return render(request, 'forum/new.html', locals())
-    else:
-        return render(request, 'intra/index.html')
+    return render(request, 'intra/index.html')
 
 def add_msg(request, p):
     mypost = Post.objects.get(id=request.POST['id'])
