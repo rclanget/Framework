@@ -14,16 +14,18 @@
 				<h1>Forum</h1>
 				<a href="{% url "forum.views.add_post" %}"><button class="btn">Ajouter un artcicle</button></a>
 				<ul>
-					<a href="#" class="grey0Back" onclick="show_sscat('sscat1')"><li>Catégorie 1</li></a>
-						<ul id="sscat1" class="forum_nav__sscat">
-							<a href="#"><li>Sous-catégorie 1</li></a>
-							<a href="#"><li>Sous-catégorie 2</li></a>
-							<a href="#"><li>Sous-catégorie 3</li></a>
-							<a href="#"><li>Sous-catégorie 4</li></a>
-						</ul>
-					<a href="#" class="grey0Back"><li>Catégorie 2</li></a>
-					<a href="#" class="grey0Back"><li>Catégorie 3</li></a>
-					<a href="#" class="grey0Back"><li>Catégorie 4</li></a>
+				{% for categorie in categories %}
+				<a href="#" class="grey0Back" onclick="show_sscat('{{ categorie.id }}')"><li>{{ categorie.name }}</li></a>
+					<ul id="{{ categorie.id }}" class="forum_nav__sscat">
+					{% for sscategorie in sscategories %}
+						{% if sscategorie.postcategorie == categorie %}
+						<a href="{% url "forum.views.list_posts" sscategorie.id %}"><li>{{ sscategorie.name }}</li></a>
+						{% endif %}
+					{% endfor %}
+					</ul>
+				{% empty %}
+				<p>Pas de catégorie</p>
+				{% endfor %}
 				</ul>
 			</div>
 			<div class="post_content">
@@ -36,9 +38,12 @@
 						<li>
 							<p>le {{ msg.date }} par {{ msg.auteur }}</p>
 							<p>{{ msg.content }}</p>
-							<form id="post{{ msg.id }}">
-									<input type="text">
-									<button type="submit" class="btn blue0Back white">OK</button>
+							<form id="post{{ msg.id }}" method="post" action="{% url 'forum.views.msg_reply' post.id %}">
+								{% csrf_token %}
+								<input type="hidden" name="id" value="{{ post.id }}">
+								<input type="hidden" name="msg_id" value="{{ msg.id }}">
+								<input type="text" name="message">
+								<button type="submit" class="btn blue0Back white">OK</button>
 							</form>
 							<button id="but{{ msg.id }}" class="btn blue0Back white" onclick="showInput('{{ msg.id }}')">Reply</button>
 						</li>
@@ -56,7 +61,9 @@
 					</ul>
 				</div>
 				<div class="post_content__response">
-					<form>
+					<form method="post" action="{% url 'forum.views.add_msg' post.id  %}">
+						{% csrf_token %}
+						<input type="hidden" name="id" value="{{ post.id }}">
 						<textarea name="message"></textarea>
 						<button type="submit" class="btn blue0Back white">Répondre</button>
 					</form>

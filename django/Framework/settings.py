@@ -91,3 +91,9 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     "templates",
 )
+
+#SESSION_COOKIE_SECURE = True
+
+# Email for developpement
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025

@@ -21,15 +21,20 @@
 				</ul>
 			</nav>
 		<div class="btn-login">
-			<button class="btn blue0Back white" onclick="showbox('login-box')">Log in</button>				
+			{% if user.is_authenticated %}
+			<a href="{% url "intra.views.user_logout" %}"><button class="btn blue0Back white">Log out</button></a>
+			{% else %}
+			<button class="btn blue0Back white" onclick="showbox('login-box')">Log in</button>
+			{% endif %}
 		</div>
 	</header>
 	<div class="login-box blue2Back white">
 		<div class="wrapper">
 			<div class="login-box_box">
 				<h2>Log in</h2>
-				<form>
-					<input type="text" name="email" placeholder="E-mail">
+				<form method="post" action="{% url 'intra.views.user_login' %}">
+					{% csrf_token %}
+					<input type="text" name="pseudo" placeholder="Pseudo">
 					<input type="password" name="password" placeholder="Password">
 					<button class="btn blue0Back white">Sign in</button>
 				</form>
@@ -40,7 +45,8 @@
 		<div class="wrapper">
 			<div class="login-box_box">
 				<h2>Register</h2>
-				<form>
+				<form method="post" action="{% url "intra.views.user_register" %}">
+					{% csrf_token %}
 					<input type="mail" name="email" placeholder="E-mail">
 					<input type="text" name="pseudo" placeholder="Pseudo">
 					<input type="password" name="password" placeholder="Password">
@@ -54,7 +60,8 @@
 		<div class="wrapper">
 			<div class="contact-box_box">
 				<h2>Contact</h2>
-				<form>
+				<form method="post" action="{% url "intra.views.contact" %}">
+					{% csrf_token %}
 					<input type="text" name="nom" placeholder="Nom">
 					<input type="mail" name="email" placeholder="E-mail">
 					<input type="text" name="sujet" placeholder="Sujet">
