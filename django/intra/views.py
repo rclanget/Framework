@@ -36,3 +36,6 @@ def home(request):
             return HttpResponseRedirect(secure_url)
     """
     return render(request, 'intra/index.html')
+
+def test(request):
+    return render(request, 'intra/test.html')

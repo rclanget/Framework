@@ -6,7 +6,7 @@
 }
 
 .wrapper {
-	width: 80%;
+	width: 80vw;
 	margin: auto;
 }
 
@@ -145,6 +145,11 @@ nav ul {
 	list-style: none;
 	text-align: center;
 	line-height: 70px;
+}
+
+nav {
+    width: 400px;
+    margin: auto;
 }
 
 nav a {
@@ -330,7 +335,7 @@ nav ul li {
 }
 
 .forum_content__posts ul a li p {
-    font-size: 13px;
+    font-size: 15px;
     line-height: 25px;
 }
 

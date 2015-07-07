@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 {% block title %}Forum - Accueil{% endblock  %}
 {% block staticfiles  %}
@@ -12,7 +13,7 @@
 		<div class="wrapper">
 			<div class="forum_nav grey2">
 				<h1>Forum</h1>
-				<a href="{% url "forum.views.add_post" %}"><button class="btn">Ajouter un artcicle</button></a>
+				<a href="{% url "forum.views.add_post" %}"><button class="btn">{% trans "Ajouter un artcicle" %}</button></a>
 				<ul>
 				{% for categorie in categories %}
 				<a href="#" class="grey0Back" onclick="show_sscat('{{ categorie.id }}')"><li>{{ categorie.name }}</li></a>
@@ -30,7 +31,7 @@
 			</div>
 			<div class="forum_content">
 				<div class="forum_content__header">
-					<h2>Derniers posts</h2>
+					<h2>{% trans "Derniers posts" %}</h2>
 				</div>
 				<div class="forum_content__posts">
 					<ul>
@@ -38,12 +39,12 @@
 						<a href="{% url 'forum.views.post' post.id %}">
 							<li>
 								<h3>{{ post.titre }}</h3>
-								<p>Posté le {{ post.date }} par {{ post.auteur }}</p>
+								<p>{% trans "Posté le" %} {{ post.date }} {% trans "par" %} {{ post.auteur }}</p>
 							</li>
 						</a>
 						{% empty %}
 						<a href="#">
-						  Aucun post par ici..
+						  {% trans "Aucun post par ici.." %}
 						</a>
 						{% endfor %}
 					</ul>

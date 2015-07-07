@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'', include('intra.urls')),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^forum/', include('forum.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

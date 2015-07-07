@@ -1,3 +1,4 @@
+{% load i18n %}
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Forum - Nouveau post{% endblock %}
@@ -12,41 +13,49 @@
 		<div class="wrapper">
 			<div class="forum_nav grey2">
 				<h1>Forum</h1>
-				<button class="btn">Ajouter un artcicle</button>
+				<a href="{% url "forum.views.add_post" %}"><button class="btn">{% trans "Ajouter un artcicle" %}</button></a>
 				<ul>
-					<a href="#" class="grey0Back" onclick="show_sscat('sscat1')"><li>Catégorie 1</li></a>
-						<ul id="sscat1" class="forum_nav__sscat">
-							<a href="#"><li>Sous-catégorie 1</li></a>
-							<a href="#"><li>Sous-catégorie 2</li></a>
-							<a href="#"><li>Sous-catégorie 3</li></a>
-							<a href="#"><li>Sous-catégorie 4</li></a>
-						</ul>
-					<a href="#" class="grey0Back"><li>Catégorie 2</li></a>
-					<a href="#" class="grey0Back"><li>Catégorie 3</li></a>
-					<a href="#" class="grey0Back"><li>Catégorie 4</li></a>
+				{% for categorie in categories %}
+				<a href="#" class="grey0Back" onclick="show_sscat('{{ categorie.id }}')"><li>{{ categorie.name }}</li></a>
+					<ul id="{{ categorie.id }}" class="forum_nav__sscat">
+					{% for sscategorie in sscategories %}
+						{% if sscategorie.postcategorie == categorie %}
+						<a href="{% url "forum.views.list_posts" sscategorie.id %}"><li>{{ sscategorie.name }}</li></a>
+						{% endif %}
+					{% endfor %}
+					</ul>
+				{% empty %}
+				<p>Pas de catégorie</p>
+				{% endfor %}
 				</ul>
 			</div>
 			<div class="post_content">
 				<div class="post_content__header">
-					<h2>Nouveau post</h2>
+					<h2>{% trans "Nouveau post" %}</h2>
 				</div>
 				<div class="newpost_content__body">
-					<form>
-						<label for="titre">Titre</label>
+					<form method="post" action="{% url 'forum.views.add_post' %}">
+						{% csrf_token %}
+						<label for="titre">{% trans "Titre" %}</label>
 						<input id="titre" type="text" name="titre" placeholder="Titre">
 
-						<label for="categorie">Tag</label>
+						<label for="categorie">{% trans "Catégorie" %}</label>
 						<select id="categorie" name="categorie">
-							<option>Catégorie 1</option>
-							<option>Catégorie 2</option>
-							<option>Catégorie 3</option>
-							<option>Catégorie 4</option>
+							{% for cat in cats %}
+							<optgroup label="{{ cat }}">
+							  {% for sscat in sscats %}
+							  {% if sscat.postcategorie == cat %}
+							  <option value="{{ sscat }}">{{ sscat }}</option>
+							  {% endif %}
+							  {% endfor %}
+							</optgroup>
+							{% endfor %}
 						</select>
 
-						<label for="message">Message</label>
+						<label for="message">{% trans "Message" %}</label>
 						<textarea id="message" name="message"></textarea>	
 
-						<button type="submit" class="btn blue0Back white">Valider</button>
+						<button type="submit" class="btn blue0Back white">{% trans "Valider" %}</button>
 					</form>
 				</div>
 			</div>

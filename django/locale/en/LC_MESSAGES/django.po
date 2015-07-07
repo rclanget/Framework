@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-07 09:25+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: Framework/settings.py:89
+msgid "French"
+msgstr ""
+
+#: Framework/settings.py:90
+msgid "English"
+msgstr ""
+
+#: forum/templates/forum/index.html:16
+#: forum/templates/forum/list_posts.html:16 forum/templates/forum/new.html:16
+#: forum/templates/forum/post.html:16
+msgid "Ajouter un artcicle"
+msgstr "Add post"
+
+#: forum/templates/forum/index.html:34
+msgid "Derniers posts"
+msgstr "last posts"
+
+#: forum/templates/forum/index.html:42
+#: forum/templates/forum/list_posts.html:42
+msgid "Posté le"
+msgstr "post"
+
+#: forum/templates/forum/index.html:42
+#: forum/templates/forum/list_posts.html:42 forum/templates/forum/post.html:54
+msgid "par"
+msgstr "by"
+
+#: forum/templates/forum/index.html:47
+msgid "Aucun post par ici.."
+msgstr "No post here.."
+
+#: forum/templates/forum/list_posts.html:47
+msgid "Pas de post pour cette catégorie."
+msgstr "No post for this category"
+
+#: forum/templates/forum/new.html:34
+msgid "Nouveau post"
+msgstr "New post"
+
+#: forum/templates/forum/new.html:39
+msgid "Titre"
+msgstr "Title"
+
+#: forum/templates/forum/new.html:42
+msgid "Catégorie"
+msgstr "Category"
+
+#: forum/templates/forum/new.html:55 templates/base.html:69
+msgid "Message"
+msgstr "Message"
+
+#: forum/templates/forum/new.html:58
+msgid "Valider"
+msgstr "Confirm"
+
+#: forum/templates/forum/post.html:49 forum/templates/forum/post.html.py:69
+msgid "Répondre"
+msgstr "Reply"
+
+#: forum/templates/forum/post.html:54
+msgid "le"
+msgstr "the"
+
+#: intra/templates/intra/index.html:15 intra/templates/intra/index.html:16
+msgid "Titre Lorem Ipsum qui accroche"
+msgstr "Very gret title for home page"
+
+#: intra/templates/intra/index.html:17 templates/base.html:48
+msgid "Inscription"
+msgstr "Register"
+
+#: intra/templates/intra/index.html:18 templates/base.html:28
+#: templates/base.html.py:35 templates/base.html:55
+msgid "Connexion"
+msgstr "Log in"
+
+#: intra/templates/intra/test.html:4
+msgid "Bonjour les nouveaux !"
+msgstr ""
+
+#: templates/base.html:18
+msgid "Annuaire"
+msgstr "Directory"
+
+#: templates/base.html:19
+msgid "Forum"
+msgstr ""
+
+#: templates/base.html:21
+msgid "Contact"
+msgstr "Contact"
+
+#: templates/base.html:26
+msgid "Déconnexion"
+msgstr "Log out"
+
+#: templates/base.html:39 templates/base.html.py:53
+msgid "Mot de passe"
+msgstr "Password"
+
+#: templates/base.html:40
+msgid "connexion"
+msgstr "Log in"
+
+#: templates/base.html:54
+msgid "Retaper votre mot de passe"
+msgstr "Repeat password"
+
+#: templates/base.html:66
+msgid "Nom"
+msgstr "Name"
+
+#: templates/base.html:68
+msgid "Sujet"
+msgstr "Subject"
+
+#: templates/base.html:70
+msgid "Envoyer"
+msgstr "Send"

@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'intra',
+    'forum',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -47,6 +48,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+)
+
+TEMPLATES_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.i18n",
 )
 
 ROOT_URLCONF = 'Framework.urls'
@@ -77,6 +83,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+gettext =lambda x: x
+
+LANGUAGES = (
+    ('fr', gettext('French')),
+    ('en', gettext('English')),
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
@@ -90,3 +102,13 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     "templates",
 )
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, '/locale/'),
+)
+
+#SESSION_COOKIE_SECURE = True
+
+# Email for developpement
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025

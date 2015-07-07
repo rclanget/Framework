@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,24 +15,33 @@
 		</div>
 			<nav>
 				<ul>
-					<a href="#"><li>Annuaire</li></a>
-					<a href="#"><li>Forum</li></a>
+					<a href="#"><li>{% trans "Annuaire" %}</li></a>
+					<a href="{% url "forum.views.home" %}"><li>{% trans "Forum" %}</li></a>
 					<a href="#"><li>Tickets</li></a>
-					<li class="white" onclick="showbox('contact-box')">Contact</li>
+					<li class="white" onclick="showbox('contact-box')">{% trans "Contact" %}</li>
 				</ul>
 			</nav>
 		<div class="btn-login">
-			<button class="btn blue0Back white" onclick="showbox('login-box')">Log in</button>				
+			<select class="btn" style="width: 20px">
+			  <option>Fr</option>
+			  <option>En</option>
+			</select>
+			{% if user.is_authenticated %}
+			<a href="{% url "intra.views.user_logout" %}"><button class="btn blue0Back white">{% trans "Déconnexion" %}</button></a>
+			{% else %}
+			<button class="btn blue0Back white" onclick="showbox('login-box')">{% trans "Connexion" %}</button>
+			{% endif %}
 		</div>
 	</header>
 	<div class="login-box blue2Back white">
 		<div class="wrapper">
 			<div class="login-box_box">
-				<h2>Log in</h2>
-				<form>
-					<input type="text" name="email" placeholder="E-mail">
-					<input type="password" name="password" placeholder="Password">
-					<button class="btn blue0Back white">Sign in</button>
+				<h2>{% trans "Connexion" %}</h2>
+				<form method="post" action="{% url 'intra.views.user_login' %}">
+					{% csrf_token %}
+					<input type="text" name="pseudo" placeholder="Pseudo">
+					<input type="password" name="password" placeholder="{% trans 'Mot de passe' %}">
+					<button class="btn blue0Back white">{% trans "connexion" %}</button>
 				</form>
 			</div>
 		</div>
@@ -39,13 +49,14 @@
 	<div class="register-box blue2Back white">
 		<div class="wrapper">
 			<div class="login-box_box">
-				<h2>Register</h2>
-				<form>
+				<h2>{% trans "Inscription" %}</h2>
+				<form method="post" action="{% url "intra.views.user_register" %}">
+					{% csrf_token %}
 					<input type="mail" name="email" placeholder="E-mail">
 					<input type="text" name="pseudo" placeholder="Pseudo">
-					<input type="password" name="password" placeholder="Password">
-					<input type="password" name="password" placeholder="Repeat Password">
-					<button class="btn blue0Back white">Sign in</button>
+					<input type="password" name="password" placeholder="{% trans 'Mot de passe' %}">
+					<input type="password" name="password" placeholder="{% trans 'Retaper votre mot de passe' %}">
+					<button class="btn blue0Back white">{% trans "Connexion" %}</button>
 				</form>
 			</div>
 		</div>
@@ -54,12 +65,13 @@
 		<div class="wrapper">
 			<div class="contact-box_box">
 				<h2>Contact</h2>
-				<form>
-					<input type="text" name="nom" placeholder="Nom">
+				<form method="post" action="{% url "intra.views.contact" %}">
+					{% csrf_token %}
+					<input type="text" name="nom" placeholder="{% trans 'Nom' %}">
 					<input type="mail" name="email" placeholder="E-mail">
-					<input type="text" name="sujet" placeholder="Sujet">
-					<textarea placeholder="Message" name="message"></textarea>
-					<button class="btn blue0Back white" type="submit">Envoyer</button>
+					<input type="text" name="sujet" placeholder="{% trans 'Sujet' %}">
+					<textarea placeholder="{% trans 'Message' %}" name="message"></textarea>
+					<button class="btn blue0Back white" type="submit">{% trans "Envoyer" %}</button>
 				</form>
 			</div>
 		</div>
