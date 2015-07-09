@@ -17,15 +17,11 @@
 				<ul>
 					<a href="#"><li>{% trans "Annuaire" %}</li></a>
 					<a href="{% url "forum.views.home" %}"><li>{% trans "Forum" %}</li></a>
-					<a href="#"><li>Tickets</li></a>
+					<a href="{% url "ticket.views.home" %}"><li>{% trans "Tickets" %}</li></a>
 					<li class="white" onclick="showbox('contact-box')">{% trans "Contact" %}</li>
 				</ul>
 			</nav>
 		<div class="btn-login">
-			<select class="btn" style="width: 20px">
-			  <option>Fr</option>
-			  <option>En</option>
-			</select>
 			{% if user.is_authenticated %}
 			<a href="{% url "intra.views.user_logout" %}"><button class="btn blue0Back white">{% trans "Déconnexion" %}</button></a>
 			{% else %}

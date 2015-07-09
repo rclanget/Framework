@@ -17,7 +17,7 @@
 				<ul>
 					<a href="#"><li>{% trans "Annuaire" %}</li></a>
 					<a href="{% url "forum.views.home" %}"><li>{% trans "Forum" %}</li></a>
-					<a href="#"><li>Tickets</li></a>
+					<a href="{% url "ticket.views.home" %}"><li>{% if user.is_staff %}Spool{% else %}{% trans "Tickets" %}{% endif %}</li></a>
 					<li class="white" onclick="showbox('contact-box')">{% trans "Contact" %}</li>
 				</ul>
 			</nav>

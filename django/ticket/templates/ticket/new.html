@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}Ticket - Nouveau ticket{% endblock %}
+{% block staticfiles %}
+	<link rel="stylesheet" href="{% static 'ticket/css/style.css' %}">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
+{% block content %}
+	<div class="forum">
+		<div class="wrapper">
+			<div class="forum_nav grey2">
+				<h1>Ticket</h1>
+				<a href="{% url 'ticket.views.add' %}"><button class="btn">Nouveau ticket</button></a>
+			</div>
+			<div class="post_content">
+				<div class="post_content__header">
+					<h2>Nouveau Ticket</h2>
+				</div>
+				<div class="newpost_content__body">
+					<form method="post" action="{% url 'ticket.views.new_ticket' %}">
+						{% csrf_token %}
+						<label for="titre">Sujet</label>
+						<input id="titre" type="text" name="titre" placeholder="Titre" required>
+
+						<label for="categorie">Type</label>
+						<select id="categorie" name="categorie">
+							{% for categorie in categories %}
+							<option>{{ categorie.name }}</option>
+							{% endfor %}
+						</select>
+
+						<label for="message">Message</label>
+						<textarea id="message" name="message"></textarea>	
+
+						<button type="submit" class="btn blue0Back white">Valider</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

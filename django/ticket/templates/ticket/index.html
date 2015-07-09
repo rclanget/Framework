@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}Ticket - Accueil{% endblock %}
+{% block staticfiles %}
+	<link rel="stylesheet" href="{% static 'ticket/css/style.css' %}">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="{% static 'ticket/js/script.js' %}"></script>
+{% endblock %}
+{% block content %}
+	<div class="forum">
+		<div class="wrapper">
+			<div class="forum_nav grey2">
+				<h1>{% if not user.is_staff %} Tickets {% else %} Spool {% endif %}</h1>
+				<a href="{% url 'ticket.views.add' %}"><button class="btn">Nouveau ticket</button></a>
+			</div>
+			<div class="forum_content">
+				<div class="forum_content__header">
+					<h2>{% if not user.is_staff %} Mes tickets {% else %} Liste des tickets {% endif %}</h2>
+				</div>
+				<div class="ticket_content__posts">
+					<ul>
+						{% if user.is_staff %}
+						{% for ticket in tickets %}
+						{% if ticket.attributedto == user.username %}
+						<a href="{% url 'ticket.views.ticket' ticket.id %}">
+							<li>
+								<div class="ticket_info">
+									<h3><span class="ticket_attribuer">ATT</span>{{ ticket.titre }}</h3>
+									<p>Date: {{ ticket.date }}</p>
+									<p>Par: {{ ticket.auteur }}</p>
+									{% if not ticket.status %}
+									<p>Fermé par: {{ ticket.closeby }}
+									{% endif %}
+								</div>
+								<div class="ticket_nav">
+								  <form method="post" action="{% url 'ticket.views.openorclose' %}">
+									{% csrf_token %}
+									<input type="hidden" name="id" value="{{ ticket.id }}">
+									<input type="hidden" name="username" value="{{ user.username }}">
+									{% if ticket.status %}
+									<button class="btn blue0Back white">Open</button>
+									{% else %}
+									<button class="btn blue2Back white">Close</button>
+									{% endif %}
+								  </form>
+								</div>
+							</li>
+						</a>
+						{% endif %}
+						{% endfor %}
+						{% for ticket in tickets %}
+						{% if not ticket.attributedto == user.username %} 
+						<a href="{% url 'ticket.views.ticket' ticket.id %}">
+							  <li>
+								<div class="ticket_info">
+									<h3>{{ ticket.titre }}</h3>
+									<p>Date: {{ ticket.date }}</p>
+									<p>Par: {{ ticket.auteur }}</p>
+									{% if not ticket.status %}
+									<p>Fermé par: {{ ticket.closeby }}
+									{% endif %}
+								</div>
+								<div class="ticket_nav">
+								  <form method="post" action="{% url 'ticket.views.openorclose' %}">
+									{% csrf_token %}
+									<input type="hidden" name="id" value="{{ ticket.id }}">
+									<input type="hidden" name="username" value="{{ user.username }}">
+									{% if ticket.status %}
+									<button class="btn blue0Back white">Open</button>
+									{% else %}
+									<button class="btn blue2Back white">Close</button>
+									{% endif %}
+								  </form>
+								</div>
+							  </li>
+						</a>
+						{% endif %}
+						{% endfor %}
+						{% else %}
+						{% for ticket in tickets %}
+						{% if ticket.auteur == user.username %}
+						<a href="{% url 'ticket.views.ticket' ticket.id %}">
+							<li>
+								<div class="ticket_info">
+									<h3>{{ ticket.titre }}</h3>
+									<p>Date: {{ ticket.date }}</p>
+									<p>Par: {{ ticket.auteur }}</p>
+									{% if not ticket.status %}
+									<p>Fermé par: {{ ticket.closeby }}</p>
+									{% endif %}
+								</div>
+								<div class="ticket_nav">
+								  <form method="post" action="{% url 'ticket.views.openorclose' %}">
+									{% csrf_token %}
+									<input type="hidden" name="id" value="{{ ticket.id }}">
+									<input type="hidden" name="username" value="{{ user.username }}">
+									{% if ticket.status %}
+									<button class="btn blue0Back white">Open</button>
+									{% else %}
+									<button class="btn blue2Back white">Close</button>
+									{% endif %}
+								  </form>
+								</div>
+							</li>
+						</a>
+						{% endif %}
+						{% endfor %}
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
