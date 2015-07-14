@@ -25,7 +25,7 @@ DEBUG = False
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ["local.42.fr"]
+ALLOWED_HOSTS = [".42.fr"]
 
 
 # Application definition
