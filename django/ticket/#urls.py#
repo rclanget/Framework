@@ -1,8 +1,0 @@
-from django.conf.urls import patterns, url
-
-urlpatterns = patterns('ticket.views',
-    url(r'^$', 'home'),
-    url(r'^accueil$', 'home'),
-    url(r'^ayes
-$', 'home'),
-)
