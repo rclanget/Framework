@@ -12,6 +12,7 @@ sys.path.append('/Volumes/Data/nfs/zfs-student-4/users/2014_paris/rclanget/djang
 os.environ.setdefault("PYTHON_EGG_CACHE", "/Volumes/Data/nfs/zfs-student-4/users/2014_paris/rclanget/django/apps/django/django_projects/Framework/egg_cache")
 
 os.environ["DJANGO_SETTINGS_MODULE"] = "Framework.settings"
+os.environ['HTTPS'] = "on"
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()

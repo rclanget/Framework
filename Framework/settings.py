@@ -111,7 +111,7 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
-#SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Email for developpement
 EMAIL_HOST = 'localhost'
