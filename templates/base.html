@@ -73,6 +73,13 @@
 		</div>
 	</div>
 	{% endblock %}
+	{% if messages %}
+	<section class="alertmsg">
+	  {% for message in messages %}
+	  <p {% if message.tags %} class="alertmsg_{{ message.tags }}"{% endif %}>{{ message }}</p>
+	  {% endfor %}
+	</section>
+	{% endif %}
    <section id="content">
        {% block content %}{% endblock %}
 	<div class="page-filter">

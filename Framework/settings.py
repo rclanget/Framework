@@ -55,6 +55,7 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATES_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
+    'django.contrib.messages.context_processors.messages',
 )
 
 ROOT_URLCONF = 'Framework.urls'

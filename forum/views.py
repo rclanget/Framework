@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from forum.models import PostCategorie, PostSsCategorie, Post, PostMessage, Thread
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 
 def home(request):
     if request.user.is_authenticated():
@@ -28,7 +29,7 @@ def post(request, p):
         categories = PostCategorie.objects.all()
         sscategories = PostSsCategorie.objects.all()
         post = Post.objects.get(id=p)
-        message = PostMessage.objects.filter(post=p)
+        msgs = PostMessage.objects.filter(post=p)
         thread = Thread.objects.all()
         return render(request, 'forum/post.html', locals())
     else:
@@ -47,10 +48,14 @@ def add_post(request):
         cats = PostCategorie.objects.all()
         sscats = PostSsCategorie.objects.all()
         if request.method == 'POST':
-            cat = PostSsCategorie.objects.get(name=request.POST['categorie'])
-            Post(titre=request.POST['titre'], auteur=request.user.username, categorie=cat).save()
-            mypost = Post.objects.get(titre=request.POST['titre'])
-            PostMessage(content=request.POST['message'], auteur=request.user.username, post=mypost).save()
+            if request.POST['titre'] and request.POST['message']:
+                cat = PostSsCategorie.objects.get(name=request.POST['categorie'])
+                Post(titre=request.POST['titre'], auteur=request.user.username, categorie=cat).save()
+                mypost = Post.objects.get(titre=request.POST['titre'])
+                PostMessage(content=request.POST['message'], auteur=request.user.username, post=mypost).save()
+                messages.add_message(request, messages.SUCCESS, 'Post ajoute')
+            else:
+                messages.add_message(request, messages.ERROR, 'Formulaire incomplet !')
         return render(request, 'forum/new.html', locals())
     return render(request, 'intra/index.html')
 

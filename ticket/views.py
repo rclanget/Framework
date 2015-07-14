@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from ticket.models import Ticket, Message, Categorie
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 
 def reply(request):
     if request.user.is_authenticated():
@@ -31,12 +32,16 @@ def attributeto(request):
 
 def new_ticket(request):
     if request.user.is_authenticated():
-        myauteur = request.user.username
-        mycategorie = Categorie.objects.get(name=request.POST['categorie'])
-        Ticket(titre=request.POST['titre'], auteur=myauteur, closeby=None, attributedto=None, status=True, categorie=mycategorie).save()
-        myticket = Ticket.objects.get(titre=request.POST['titre'])
-        Message(content=request.POST['message'], auteur=myauteur, ticket=myticket).save()
         categories = Categorie.objects.all()
+        if not request.POST['titre'] or not request.POST['message']:
+            messages.add_message(request, messages.ERROR, 'Formulaire incomplet !')
+        else:
+            myauteur = request.user.username
+            mycategorie = Categorie.objects.get(name=request.POST['categorie'])
+            Ticket(titre=request.POST['titre'], auteur=myauteur, closeby=None, attributedto=None, status=True, categorie=mycategorie).save()
+            myticket = Ticket.objects.get(titre=request.POST['titre'])
+            Message(content=request.POST['message'], auteur=myauteur, ticket=myticket).save()
+            messages.add_message(request, messages.SUCCESS, 'Ticket envoye !')
         return render(request, 'ticket/new.html', locals())
     return render(request, 'intra/index.html')
 
@@ -49,7 +54,7 @@ def add(request):
 def ticket(request, t):
     if request.user.is_authenticated():
         ticket = Ticket.objects.get(id=t)
-        messages = Message.objects.all()
+        msgs = Message.objects.all()
         users = User.objects.all()
         return render(request, 'ticket/ticket.html', locals())
     return render(request, 'intra/index.html')

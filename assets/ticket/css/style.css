@@ -99,6 +99,26 @@ a, a:hover {
 	background-color: #1b222c;
 }
 
+/* Alerte messages */
+.alertmsg {
+          display: block;
+          width: 100%;
+          height: 50px;
+          line-height: 50px;
+          text-align: center;
+}
+
+.alertmsg_info {
+    background-color: yellow;
+}
+
+.alertmsg_success {
+    background-color: green;
+}
+
+.alertmsg_error {
+    background-color: red;
+}
 
 /* ACCUEIL */
 

@@ -45,11 +45,11 @@
 				</div>
 				<div class="post_content__body">
 					<ul>
-						{% for message in messages %}
-						{% if message.ticket == ticket %}
+						{% for msg in msgs %}
+						{% if msg.ticket == ticket %}
 						<li>
-							<p>{{ message.auteur }} - {{ message.date }}</p>
-							<p>{{ message.content }}</p>
+							<p>{{ msg.auteur }} - {{ msg.date }}</p>
+							<p>{{ msg.content }}</p>
 						</li>
 						{% endif %}
 						{% endfor %}

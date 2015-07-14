@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 def user_logout(request):
     logout(request)
@@ -23,8 +24,11 @@ def user_register(request):
     return render(request, 'intra/index.html')
 
 def contact(request):
-    message = "Nom: " + request.POST['nom'] + " Message: " + request.POST['message'] 
-    send_mail(request.POST['sujet'], message, request.POST['email'], ['roger.clanget@live.fr'], fail_silently=False)
+    if not request.POST['nom'] or not request.POST['message'] or not request.POST['sujet'] or not request.POST['email']:
+        messages.add_message(request, messages.ERROR, 'Formulaire incomplet !')
+    else:
+        message = "Nom: " + request.POST['nom'] + " Message: " + request.POST['message'] 
+        send_mail(request.POST['sujet'], message, request.POST['email'], ['roger.clanget@live.fr'], fail_silently=False)
     return render(request, 'intra/index.html')
 
 def home(request):
