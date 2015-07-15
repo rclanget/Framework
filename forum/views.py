@@ -53,12 +53,11 @@ def add_post(request):
         cats = PostCategorie.objects.all()
         sscats = PostSsCategorie.objects.all()
         if request.method == 'POST':
-            newcat = request.POST['categorie']
             if request.POST['titre'] and request.POST['message']:
-                if request.POST["ss" + newcat] == "null":
+                if request.POST["sscategorie"] == "null":
                     sscat = None
                 else:
-                    sscat = PostSsCategorie.objects.get(name=request.POST["ss" + newcat])
+                    sscat = PostSsCategorie.objects.get(name=request.POST["sscategorie"])
                 cat = PostCategorie.objects.get(name=request.POST['categorie'])
                 Post(titre=request.POST['titre'], auteur=request.user.username, sscategorie=sscat, categorie=cat).save()
                 if Post.objects.filter(titre=request.POST['titre']).count() > 1:
