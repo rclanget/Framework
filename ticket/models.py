@@ -6,13 +6,13 @@ class Message(models.Model):
     date = models.DateTimeField(auto_now_add=True, verbose_name="Date de creation")
     ticket = models.ForeignKey('Ticket')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.content
 
 class Categorie(models.Model):
     name = models.CharField(max_length=100)
     
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 class Ticket(models.Model):
@@ -24,5 +24,5 @@ class Ticket(models.Model):
     status = models.BooleanField(default=True)
     categorie = models.ForeignKey('Categorie')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.titre

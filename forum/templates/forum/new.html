@@ -16,11 +16,11 @@
 				<a href="{% url "forum.views.add_post" %}"><button class="btn">{% trans "Ajouter un artcicle" %}</button></a>
 				<ul>
 				{% for categorie in categories %}
-				<a href="#" class="grey0Back" onclick="show_sscat('{{ categorie.id }}')"><li>{{ categorie.name }}</li></a>
+				<a href="{% url "forum.views.list_posts" categorie.id %}" class="grey0Back"><li>{{ categorie.name }}</li></a>
 					<ul id="{{ categorie.id }}" class="forum_nav__sscat">
 					{% for sscategorie in sscategories %}
 						{% if sscategorie.postcategorie == categorie %}
-						<a href="{% url "forum.views.list_posts" sscategorie.id %}"><li>{{ sscategorie.name }}</li></a>
+						<a href="{% url "forum.views.list_posts_bysscat" categorie.id sscategorie.id %}"><li>{{ sscategorie.name }}</li></a>
 						{% endif %}
 					{% endfor %}
 					</ul>
@@ -42,16 +42,20 @@
 						<label for="categorie">{% trans "Catégorie" %}</label>
 						<select id="categorie" name="categorie">
 							{% for cat in cats %}
-							<optgroup label="{{ cat }}">
-							  {% for sscat in sscats %}
-							  {% if sscat.postcategorie == cat %}
-							  <option value="{{ sscat }}">{{ sscat }}</option>
-							  {% endif %}
-							  {% endfor %}
-							</optgroup>
+							<option id="{{ cat }}" value="{{ cat }}">{{ cat }}</option>
 							{% endfor %}
 						</select>
-
+                        <label>{% trans "Sous-catégorie" %}</label>
+						{% for cat in cats %}
+						<select id="{{ cat|cut:" " }}" class="cat_souscategorie" name="">
+                          <option value="null">-</option>
+						  {% for sscat in sscats %}
+						  {% if sscat.postcategorie == cat %}
+						  <option value="{{ sscat|cut:" " }}">{{ sscat }}</option>
+						  {% endif %}
+						  {% endfor %}
+						</select>
+						{% endfor %}
 						<label for="message">{% trans "Message" %}</label>
 						<textarea id="message" name="message"></textarea>	
 
@@ -61,4 +65,16 @@
 			</div>
 		</div>
 	</div>
+{% endblock %}
+{% block javascript %}
+	<script>
+	  $("#categorie").change(function() 
+	  {
+		$(".cat_souscategorie").hide();
+		var str = "#" + $("#categorie option:selected").text();
+		$("#categorie option:selected").name("caca");
+		str = str.replace(/ /g,'');
+		$(str).show();
+	  }).trigger("change");
+	</script>
 {% endblock %}

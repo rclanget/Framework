@@ -18,7 +18,7 @@ def list_posts(request, cat):
     if request.user.is_authenticated():
         categories = PostCategorie.objects.all()
         sscategories = PostSsCategorie.objects.all()
-        mycat = PostSsCategorie.objects.get(id=cat)
+        mycat = PostCategorie.objects.get(id=cat)
         posts = Post.objects.filter(categorie=cat).order_by('-date')
         return render(request, 'forum/list_posts.html', locals())
     else:
@@ -35,9 +35,14 @@ def post(request, p):
     else:
         return render(request, 'intra/index.html')
 
-def list_posts_bysscat(request, categorie, sscategorie):
+def list_posts_bysscat(request, cat, sscat):
     if request.user.is_authenticated():
-        return render(request, 'forum/list_posts.html')
+        categories = PostCategorie.objects.all()
+        sscategories = PostSsCategorie.objects.all()
+        mycat = PostCategorie.objects.get(id=cat)
+        mysscat = PostSsCategorie.objects.get(id=sscat)
+        posts = Post.objects.filter(sscategorie=sscat).order_by('-date')
+        return render(request, 'forum/list_posts.html', locals())
     else:
         return render(request, 'intra/index.html')
 
@@ -48,9 +53,17 @@ def add_post(request):
         cats = PostCategorie.objects.all()
         sscats = PostSsCategorie.objects.all()
         if request.method == 'POST':
+            newcat = request.POST['categorie']
             if request.POST['titre'] and request.POST['message']:
-                cat = PostSsCategorie.objects.get(name=request.POST['categorie'])
-                Post(titre=request.POST['titre'], auteur=request.user.username, categorie=cat).save()
+                if request.POST["ss" + newcat] == "null":
+                    sscat = None
+                else:
+                    sscat = PostSsCategorie.objects.get(name=request.POST["ss" + newcat])
+                cat = PostCategorie.objects.get(name=request.POST['categorie'])
+                Post(titre=request.POST['titre'], auteur=request.user.username, sscategorie=sscat, categorie=cat).save()
+                if Post.objects.filter(titre=request.POST['titre']).count() > 1:
+                    messages.add_message(request, messages.ERROR, 'Titre existant !')
+                    return render(request, 'forum/new.html', locals())
                 mypost = Post.objects.get(titre=request.POST['titre'])
                 PostMessage(content=request.POST['message'], auteur=request.user.username, post=mypost).save()
                 messages.add_message(request, messages.SUCCESS, 'Post ajoute')

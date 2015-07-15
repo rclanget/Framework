@@ -16,11 +16,11 @@
 				<a href="{% url "forum.views.add_post" %}"><button class="btn">{% trans "Ajouter un artcicle" %}</button></a>
 				<ul>
 				{% for categorie in categories %}
-				<a href="#" class="grey0Back" onclick="show_sscat('{{ categorie.id }}')"><li>{{ categorie.name }}</li></a>
+				<a href="{% url "forum.views.list_posts" categorie.id %}" class="{% if mycat and categorie == mycat %}blue0Back"><li class="white">{% else %}grey0Back"><li>{% endif %}{{ categorie.name }}</li></a>
 					<ul id="{{ categorie.id }}" class="forum_nav__sscat">
 					{% for sscategorie in sscategories %}
 						{% if sscategorie.postcategorie == categorie %}
-						<a href="{% url "forum.views.list_posts" sscategorie.id %}"><li>{{ sscategorie.name }}</li></a>
+						<a href="{% url "forum.views.list_posts_bysscat" categorie.id sscategorie.id %}"><li>{{ sscategorie.name }}</li></a>
 						{% endif %}
 					{% endfor %}
 					</ul>
@@ -31,7 +31,7 @@
 			</div>
 			<div class="forum_content">
 				<div class="forum_content__header">
-					<h2>{{ mycat.name }}</h2>
+					<h2>{% if mysscat %} {{ mysscat.name }} {% else %} {{ mycat.name }} {% endif %}</h2>
 				</div>
 				<div class="forum_content__posts">
 					<ul>
@@ -52,4 +52,9 @@
 			</div>
 		</div>
 	</div>
+{% endblock %}
+{% block javascript %}
+	<script>
+		show_sscat({{ mycat.id }});// Show sscategorie list of the categorie page
+	</script>
 {% endblock %}

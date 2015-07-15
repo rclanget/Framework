@@ -4,23 +4,24 @@ from django.db import models
 class PostCategorie(models.Model):
     name = models.CharField(max_length=100)
     
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 class PostSsCategorie(models.Model):
     name = models.CharField(max_length=100)
     postcategorie = models.ForeignKey('PostCategorie')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 class Post(models.Model):
     titre = models.CharField(max_length=150)
     auteur = models.CharField(max_length=100)
     date = models.DateTimeField(auto_now_add=True, verbose_name="Date de publication")
-    categorie = models.ForeignKey('PostSsCategorie')
+    sscategorie = models.ForeignKey('PostSsCategorie', null=True)
+    categorie = models.ForeignKey('PostCategorie')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.titre
 
 class PostMessage(models.Model):
@@ -29,7 +30,7 @@ class PostMessage(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey('Post')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.content
 
 class Thread(models.Model):
@@ -38,6 +39,6 @@ class Thread(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     postmessage = models.ForeignKey('PostMessage')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.content
     
