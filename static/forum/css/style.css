@@ -483,3 +483,9 @@ nav ul li {
 	height: 100px;
 	line-height: 100px;
 }
+
+.lang-box {
+	position: absolute;
+	right: 200px;
+	top: 25px;
+	h

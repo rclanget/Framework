@@ -21,9 +21,24 @@
 					<li class="white" onclick="showbox('contact-box')">{% trans "Contact" %}</li>
 				</ul>
 			</nav>
+		<div class="lang-box">
+			<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+			    <input name="next" type="hidden" value="{% url 'intra.views.home' %}" />
+			    <select name="language">
+			        {% for language in LANGUAGES %}
+			            <option value="{{ language.0 }}">
+			                {{ language.1 }}
+			            </option>
+			        {% endfor %}
+			    </select>
+			    <input type="submit" value="Go" />
+			</form>
+		</div>
 		<div class="btn-login">
 			{% if user.is_authenticated %}
-			<a href="{% url "intra.views.user_logout" %}"><button class="btn blue0Back white">{% trans "Déconnexion" %}</button></a>
+			<a href="{% url "intra.views.user_logout" %}">
+				<button class="btn blue0Back white">{% trans "Déconnexion" %}</button>
+			</a>
 			{% else %}
 			<button class="btn blue0Back white" onclick="showbox('login-box')">{% trans "Connexion" %}</button>
 			{% endif %}
