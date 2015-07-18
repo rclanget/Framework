@@ -12,10 +12,15 @@
 {% block content %}
 	<div class="content">
 		<div class="wrapper">
-			<h1 class="white">{% trans "Titre Lorem Ipsum qui accroche" %}</h1>
-			<h2 class="white">{% trans "Titre Lorem Ipsum qui accroche" %}</h2>
+			{% if user.is_authenticated %}
+			<h1 class="white">{% trans "Bienvenue" %}</h1>
+			<h2 class="white">{% trans "Vous êtes maintenant connecté" %}</h2>
+			{% else %}
+			<h1 class="white">{% trans "Bonjour" %}</h1>
+			<h2 class="white">{% trans "Veuillez vous connecter ou vous enregister" %}</h2>
 			<button class="btn blue0Back white" onclick="showbox('register-box')">{% trans "Inscription" %}</button>
 			<button class="btn whiteBack black" onclick="showbox('login-box')">{% trans "Connexion" %}</button>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}

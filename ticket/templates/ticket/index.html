@@ -13,11 +13,11 @@
 		<div class="wrapper">
 			<div class="forum_nav grey2">
 				<h1>{% if not user.is_staff %} Tickets {% else %} Spool {% endif %}</h1>
-				<a href="{% url 'ticket.views.add' %}"><button class="btn">Nouveau ticket</button></a>
+				<a href="{% url 'ticket.views.add' %}"><button class="btn">{% trans "Nouveau ticket" %}</button></a>
 			</div>
 			<div class="forum_content">
 				<div class="forum_content__header">
-					<h2>{% if not user.is_staff %} Mes tickets {% else %} Liste des tickets {% endif %}</h2>
+					<h2>{% if not user.is_staff %} {% trans "Mes tickets" %} {% else %} {% trans "Liste des tickets" %} {% endif %}</h2>
 				</div>
 				<div class="ticket_content__posts">
 					<ul>
@@ -28,10 +28,10 @@
 							<li>
 								<div class="ticket_info">
 									<h3><span class="ticket_attribuer">ATT</span>{{ ticket.titre }}</h3>
-									<p>Date: {{ ticket.date }}</p>
-									<p>Par: {{ ticket.auteur }}</p>
+									<p>{% trans "Date" %}: {{ ticket.date }}</p>
+									<p>{% trans "Par" %}: {{ ticket.auteur }}</p>
 									{% if not ticket.status %}
-									<p>Fermé par: {{ ticket.closeby }}
+									<p>{% trans "Fermé par" %}: {{ ticket.closeby }}
 									{% endif %}
 								</div>
 								<div class="ticket_nav">
@@ -40,9 +40,9 @@
 									<input type="hidden" name="id" value="{{ ticket.id }}">
 									<input type="hidden" name="username" value="{{ user.username }}">
 									{% if ticket.status %}
-									<button class="btn blue0Back white">Open</button>
+									<button class="btn blue0Back white">{% trans "Ouvert" %}</button>
 									{% else %}
-									<button class="btn blue2Back white">Close</button>
+									<button class="btn blue2Back white">{% trans "Fermé" %}</button>
 									{% endif %}
 								  </form>
 								</div>
@@ -56,10 +56,10 @@
 							  <li>
 								<div class="ticket_info">
 									<h3>{{ ticket.titre }}</h3>
-									<p>Date: {{ ticket.date }}</p>
-									<p>Par: {{ ticket.auteur }}</p>
+									<p>{% trans "Date" %}: {{ ticket.date }}</p>
+									<p>{% trans "Par" %}: {{ ticket.auteur }}</p>
 									{% if not ticket.status %}
-									<p>Fermé par: {{ ticket.closeby }}
+									<p>{% trans "Fermé par" %}: {{ ticket.closeby }}
 									{% endif %}
 								</div>
 								<div class="ticket_nav">
@@ -68,9 +68,9 @@
 									<input type="hidden" name="id" value="{{ ticket.id }}">
 									<input type="hidden" name="username" value="{{ user.username }}">
 									{% if ticket.status %}
-									<button class="btn blue0Back white">Open</button>
+									<button class="btn blue0Back white">{% trans "Ouvert" %}</button>
 									{% else %}
-									<button class="btn blue2Back white">Close</button>
+									<button class="btn blue2Back white">{% trans "Fermé" %}</button>
 									{% endif %}
 								  </form>
 								</div>
@@ -85,10 +85,10 @@
 							<li>
 								<div class="ticket_info">
 									<h3>{{ ticket.titre }}</h3>
-									<p>Date: {{ ticket.date }}</p>
-									<p>Par: {{ ticket.auteur }}</p>
+									<p>{% trans "Date" %}: {{ ticket.date }}</p>
+									<p>{% trans "Par" %}: {{ ticket.auteur }}</p>
 									{% if not ticket.status %}
-									<p>Fermé par: {{ ticket.closeby }}</p>
+									<p>{% trans "Fermé par" %}: {{ ticket.closeby }}</p>
 									{% endif %}
 								</div>
 								<div class="ticket_nav">
@@ -97,9 +97,9 @@
 									<input type="hidden" name="id" value="{{ ticket.id }}">
 									<input type="hidden" name="username" value="{{ user.username }}">
 									{% if ticket.status %}
-									<button class="btn blue0Back white">Open</button>
+									<button class="btn blue0Back white">{% trans "Ouvert" %}</button>
 									{% else %}
-									<button class="btn blue2Back white">Close</button>
+									<button class="btn blue2Back white">{% trans "Fermé" %}</button>
 									{% endif %}
 								  </form>
 								</div>

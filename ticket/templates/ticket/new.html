@@ -13,16 +13,16 @@
 		<div class="wrapper">
 			<div class="forum_nav grey2">
 				<h1>Ticket</h1>
-				<a href="{% url 'ticket.views.add' %}"><button class="btn">Nouveau ticket</button></a>
+				<a href="{% url 'ticket.views.add' %}"><button class="btn">{% trans "Nouveau ticket" %}</button></a>
 			</div>
 			<div class="post_content">
 				<div class="post_content__header">
-					<h2>Nouveau Ticket</h2>
+					<h2>{% trans "Nouveau Ticket" %}</h2>
 				</div>
 				<div class="newpost_content__body">
 					<form method="post" action="{% url 'ticket.views.new_ticket' %}">
 						{% csrf_token %}
-						<label for="titre">Sujet</label>
+						<label for="titre">{% trans "Sujet" %}</label>
 						<input id="titre" type="text" name="titre" placeholder="Titre" required>
 
 						<label for="categorie">Type</label>
@@ -32,10 +32,10 @@
 							{% endfor %}
 						</select>
 
-						<label for="message">Message</label>
+						<label for="message">{% trans "Message" %}</label>
 						<textarea id="message" name="message"></textarea>	
 
-						<button type="submit" class="btn blue0Back white">Valider</button>
+						<button type="submit" class="btn blue0Back white">{% trans "Valider" %}</button>
 					</form>
 				</div>
 			</div>
