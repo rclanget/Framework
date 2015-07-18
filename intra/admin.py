@@ -1,3 +1,4 @@
 from django.contrib import admin
+from intra.models import UserLanguage
 
-# Register your models here.
+admin.site.register(UserLanguage)
