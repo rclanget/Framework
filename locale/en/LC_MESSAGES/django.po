@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-18 19:41+0000\n"
+"POT-Creation-Date: 2015-07-20 15:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,6 +90,20 @@ msgstr "Reply"
 msgid "le"
 msgstr "the"
 
+#: forum/views.py:65
+msgid "Titre existant !"
+msgstr "Title already exist !"
+
+#: forum/views.py:69
+#, fuzzy
+#| msgid "Posté le"
+msgid "Post ajoute"
+msgstr "post"
+
+#: forum/views.py:71 intra/views.py:44 ticket/views.py:39
+msgid "Formulaire incomplet !"
+msgstr "Incomplete form"
+
 #: intra/templates/intra/index.html:16
 msgid "Bienvenue"
 msgstr "Welcome"
@@ -114,6 +128,20 @@ msgstr "Register"
 #: templates/base.html.py:50 templates/base.html:70
 msgid "Connexion"
 msgstr "Log in"
+
+#: intra/views.py:25
+#, fuzzy
+#| msgid "Vous êtes maintenant connecté"
+msgid "Vous êtes connecté"
+msgstr "You're connected"
+
+#: intra/views.py:37
+msgid "Votre compte a été créé"
+msgstr "Your account has been created"
+
+#: intra/views.py:39
+msgid "Ce pseudo éxiste deja !"
+msgstr "This pseudo already exist !"
 
 #: templates/base.html:18
 msgid "Annuaire"

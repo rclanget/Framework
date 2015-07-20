@@ -39,7 +39,6 @@
 						<a href="{% url 'forum.views.post' post.id %}">
 							<li>
 								<h3>{{ post.titre }}</h3>
-								<h2>cat: {{ post.categorie }} sous-cat: {{ post.sscategorie }}</h2>
 								<p>{% trans "Posté le" %} {{ post.date }} {% trans "par" %} {{ post.auteur }}</p>
 							</li>
 						</a>

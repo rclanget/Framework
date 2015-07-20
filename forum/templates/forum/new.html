@@ -4,8 +4,8 @@
 {% block title %}Forum - Nouveau post{% endblock %}
 {% block staticfiles %}
 	<link rel="stylesheet" href="{% static 'forum/css/style.css' %}">
-	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="{% static 'forum/js/script.js' %}"></script>
 {% endblock %}
 {% block content %}
@@ -47,7 +47,7 @@
 						</select>
                         <label>{% trans "Sous-catégorie" %}</label>
 						{% for cat in cats %}
-						<select id="{{ cat|cut:" " }}" class="cat_souscategorie">
+						<select id="c-{{ cat|cut:" " }}" class="cat_souscategorie">
                           <option value="null">-</option>
 						  {% for sscat in sscats %}
 						  {% if sscat.postcategorie == cat %}
@@ -72,7 +72,7 @@
 	  {
 		$(".cat_souscategorie").hide();
 		$(".cat_souscategorie").attr('name', 'ss');
-		var str = "#" + $("#categorie option:selected").text();
+		var str = "#c-" + $("#categorie option:selected").text();
 		str = str.replace(/ /g,'');
 		$(str).attr('name', 'sscategorie');
 		$(str).show();

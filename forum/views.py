@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from forum.models import PostCategorie, PostSsCategorie, Post, PostMessage, Thread
 from django.core.urlresolvers import reverse
 from django.contrib import messages
+from django.utils.translation import ugettext as _
 
 def home(request):
     if request.user.is_authenticated():
@@ -61,13 +62,13 @@ def add_post(request):
                 cat = PostCategorie.objects.get(name=request.POST['categorie'])
                 Post(titre=request.POST['titre'], auteur=request.user.username, sscategorie=sscat, categorie=cat).save()
                 if Post.objects.filter(titre=request.POST['titre']).count() > 1:
-                    messages.add_message(request, messages.ERROR, 'Titre existant !')
+                    messages.add_message(request, messages.ERROR, _("Titre existant !"))
                     return render(request, 'forum/new.html', locals())
                 mypost = Post.objects.get(titre=request.POST['titre'])
                 PostMessage(content=request.POST['message'], auteur=request.user.username, post=mypost).save()
-                messages.add_message(request, messages.SUCCESS, 'Post ajoute')
+                messages.add_message(request, messages.SUCCESS, _("Post ajoute"))
             else:
-                messages.add_message(request, messages.ERROR, 'Formulaire incomplet !')
+                messages.add_message(request, messages.ERROR, _("Formulaire incomplet !"))
         return render(request, 'forum/new.html', locals())
     return render(request, 'intra/index.html')
 

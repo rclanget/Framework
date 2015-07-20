@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from intra.models import UserLanguage
 from django.utils import translation
+from django.utils.translation import gettext as _
 
 def user_logout(request):
     logout(request)
@@ -21,7 +22,7 @@ def user_login(request):
         try:
             myuser = UserLanguage.objects.get(user=request.user.username)
             translation.activate(myuser.language)
-            messages.add_message(request, messages.SUCCESS, 'Vous êtes connecté')
+            messages.add_message(request, messages.SUCCESS, _("Vous êtes connecté"))
         except:
             myuser = None
     else:
@@ -33,14 +34,14 @@ def user_register(request):
         User.objects.get(username=request.POST['pseudo'])
     except User.DoesNotExist:
         User.objects.create_user(request.POST['pseudo'], request.POST['email'], request.POST['password'])
-        messages.add_message(request, messages.SUCCESS, 'Votre compte a été créé')
+        messages.add_message(request, messages.SUCCESS, _("Votre compte a été créé"))
     else:
-        messages.add_message(request, messages.ERROR, 'Ce pseudo éxiste deja !')
+        messages.add_message(request, messages.ERROR, _("Ce pseudo éxiste deja !"))
     return render(request, 'intra/index.html')
 
 def contact(request):
     if not request.POST['nom'] or not request.POST['message'] or not request.POST['sujet'] or not request.POST['email']:
-        messages.add_message(request, messages.ERROR, 'Formulaire incomplet !')
+        messages.add_message(request, messages.ERROR, _("Formulaire incomplet !"))
     else:
         message = "Nom: " + request.POST['nom'] + " Message: " + request.POST['message'] 
         send_mail(request.POST['sujet'], message, request.POST['email'], ['roger.clanget@live.fr'], fail_silently=False)

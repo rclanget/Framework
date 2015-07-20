@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import ugettext as _
 
 def reply(request):
     if request.user.is_authenticated():
@@ -35,7 +36,7 @@ def new_ticket(request):
     if request.user.is_authenticated():
         categories = Categorie.objects.all()
         if not request.POST['titre'] or not request.POST['message']:
-            messages.add_message(request, messages.ERROR, 'Formulaire incomplet !')
+            messages.add_message(request, messages.ERROR, _("Formulaire incomplet !"))
         else:
             try:
                 Ticket.objects.get(titre=request.POST['titre'])
