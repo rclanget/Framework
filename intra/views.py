@@ -20,16 +20,22 @@ def user_login(request):
         login(request, user)
         try:
             myuser = UserLanguage.objects.get(user=request.user.username)
-        except ObjectDoesNotExist:
+            translation.activate(myuser.language)
+            messages.add_message(request, messages.SUCCESS, 'Vous êtes connecté')
+        except:
             myuser = None
-        else:
-            request.session['django_language'] = myuser.language
     else:
         error = True
     return render(request, 'intra/index.html', locals())
 
 def user_register(request):
-    User.objects.create_user(request.POST['pseudo'], request.POST['email'], request.POST['password'])
+    try:
+        User.objects.get(username=request.POST['pseudo'])
+    except User.DoesNotExist:
+        User.objects.create_user(request.POST['pseudo'], request.POST['email'], request.POST['password'])
+        messages.add_message(request, messages.SUCCESS, 'Votre compte a été créé')
+    else:
+        messages.add_message(request, messages.ERROR, 'Ce pseudo éxiste deja !')
     return render(request, 'intra/index.html')
 
 def contact(request):
@@ -47,6 +53,6 @@ def home(request):
             user = UserLanguage.objects.get(user=request.user.username)
             user.language = language
             user.save()
-        except Model.DoesNotExist:
-            obj = Model.objects.create(user=request.user.username, language=language)
+        except:
+            UserLanguage.objects.create(user=request.user.username, language=language)
     return render(request, 'intra/index.html')

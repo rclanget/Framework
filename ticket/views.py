@@ -4,6 +4,7 @@ from ticket.models import Ticket, Message, Categorie
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 
 def reply(request):
     if request.user.is_authenticated():
@@ -36,12 +37,15 @@ def new_ticket(request):
         if not request.POST['titre'] or not request.POST['message']:
             messages.add_message(request, messages.ERROR, 'Formulaire incomplet !')
         else:
-            myauteur = request.user.username
-            mycategorie = Categorie.objects.get(name=request.POST['categorie'])
-            Ticket(titre=request.POST['titre'], auteur=myauteur, closeby=None, attributedto=None, status=True, categorie=mycategorie).save()
-            myticket = Ticket.objects.get(titre=request.POST['titre'])
-            Message(content=request.POST['message'], auteur=myauteur, ticket=myticket).save()
-            messages.add_message(request, messages.SUCCESS, 'Ticket envoye !')
+            try:
+                Ticket.objects.get(titre=request.POST['titre'])
+            except Ticket.DoesNotExist:
+                myauteur = request.user.username
+                mycategorie = Categorie.objects.get(name=request.POST['categorie'])
+                Ticket(titre=request.POST['titre'], auteur=myauteur, closeby=None, attributedto=None, status=True, categorie=mycategorie).save()
+                myticket = Ticket.objects.get(titre=request.POST['titre'])
+                Message(content=request.POST['message'], auteur=myauteur, ticket=myticket).save()
+                messages.add_message(request, messages.SUCCESS, 'Ticket envoye !')
         return render(request, 'ticket/new.html', locals())
     return render(request, 'intra/index.html')
 

@@ -6,4 +6,4 @@ class UserLanguage(models.Model):
     language = models.CharField(max_length=100)
 
     def __unicode__(self):
-    	return self.language
+    	return self.user
